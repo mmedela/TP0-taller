@@ -61,7 +61,7 @@ El caracter ` | ` (pipe) funciona como una tubería que conecta el *stdout* a un
 
 ### Errores de estilo detectados por el SERCOM:
 
-![Salida SERCOM con errores de estilo](IMG/paso1_estilo.png)
+![Salida SERCOM con errores de estilo](images/errores%20codificacion%20paso%201.png)
 
 Errores encontrados en `paso1_wordscounter.c`.
 
