@@ -43,11 +43,11 @@ Si en cambio hiciéramos la suma de los `sizeof()` de cada elemento daría 16.
 
 Estas tres entradas estándares le sirven a cualquier programa para operar la entrada y salida cuando se está ejecutando una shell de Unix.
 
-El *stdin* es el diminutivo de standard input y refiere a todo con lo que recibe por entrada un proceso, puede ser interacción de teclado del usuario o un archivo recibido (en caso de que sea redirigido).
+El *stdin* es el diminutivo de standard input y se refiere a todo con lo que recibe por entrada un proceso, puede ser interacción de teclado del usuario o un archivo recibido (en caso de que sea redirigido).
 
 *stdout* diminutivo de standard output es la salida el proceso y será mostrado en la terminal.
 
-Por último el *stderr* al igual que los otros dos, el diminutivo es standard error y al igual que stdout manda los errores a mostrarse por la terminal. 
+Por último el *stderr* al igual que los otros dos, el diminutivo es standard error y usa stdout para mostrar los errores al usuario. 
 
 Me gustaría agregar que estos tres estándares son file descriptors y ofrecen universalidad a los programas para poder usarse. Cada estándar tiene un número asociado que hace referencia a un file descriptor.
 
