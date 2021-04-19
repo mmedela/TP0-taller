@@ -4,57 +4,16 @@
 
 ### Padrón: 101769
 
-### Repositorio: https://github.com/luciaPardo/tp0
+### Repositorio: https://github.com/mmedela/TP0-taller
 
 ### 1er cuatrimestre de 2021
-
-# Índice
-
-* [Paso 0](https://github.com/luciaPardo/tp0#paso-0)
-    - [Entorno de trabajo](https://github.com/luciaPardo/tp0#a-entorno-de-trabajo)
-    - [Valgrind](https://github.com/luciaPardo/tp0#b-valgrind)
-    - [Sizeof()](https://github.com/luciaPardo/tp0#c-sizeof)
-    - [Diferencias sizeof()](https://github.com/luciaPardo/tp0#d-diferencia-sizeof-de-una-struct-respecto-a-una-suma-de-sizeof-de-cada-uno-de-sus-elementos)
-    - [Stdin, Stdout, Stderr](https://github.com/luciaPardo/tp0#e-stdin-stdout-stderr)
-
-* [Paso 1](https://github.com/luciaPardo/tp0#paso-1)
-    - [Errores de estilo detectador por el SERCOM](https://github.com/luciaPardo/tp0#errores-de-estilo-detectador-por-el-sercom)
-    - [Salida SERCOM con errores del ejecutable](https://github.com/luciaPardo/tp0#salida-del-sercom-con-errores-del-ejecutable)
-
-* [Paso 2](https://github.com/luciaPardo/tp0#paso-2)
-    - [Cambios respecto versión anterior](https://github.com/luciaPardo/tp0#a-cambios-respecto-version-anterior)
-    - [Salida SERCOM de estilo](https://github.com/luciaPardo/tp0#b-salida-sercom-sin-errores-de-estilo)
-    - [Salida SECOM con errores ejecución](https://github.com/luciaPardo/tp0#c-salida-sercom-sobre-errores-de-ejecuci%C3%B3n)
-
-* [Paso 3](https://github.com/luciaPardo/tp0#paso-3)
-    - [Cambios respecto versión anterior](https://github.com/luciaPardo/tp0#a-1)
-    - [ Errores de ejecución](https://github.com/luciaPardo/tp0#b-errores-de-ejecuci%C3%B3n)
-
-* [Paso 4](https://github.com/luciaPardo/tp0#paso-4)
-    - [Cambios respecto versión anterior](https://github.com/luciaPardo/tp0#a-1)
-    - [Salida SERCOM de Valgrind para TDA](https://github.com/luciaPardo/tp0#b-salida-sercom-de-valgrind-para-tda)
-    - [Strncpy()](https://github.com/luciaPardo/tp0#d-strncpy)
-    - [Segmentation fault y buffer overflow](https://github.com/luciaPardo/tp0#e-segmentation-fault-y-buffer-overflow)
-
-* [Paso 5](https://github.com/luciaPardo/tp0#paso-5)
-    - [Cambios respecto versión anterior](https://github.com/luciaPardo/tp0#a-cambios)
-    - [Salida SERCOM sobre Invalid File y Single word](https://github.com/luciaPardo/tp0#b-invalid-file-y-una-palabra)
-    - [Hexdump](https://github.com/luciaPardo/tp0#c-hexdump)
-    - [GDB](https://github.com/luciaPardo/tp0#d-gdb)
-
-* [Paso 6](https://github.com/luciaPardo/tp0#paso-6)
-    - [Cambios realizados respecto la versión anterior](https://github.com/luciaPardo/tp0#a-cambios)
-    - [Historial de Submits](https://github.com/luciaPardo/tp0#b-historial-de-submits)
-    - [Ejecución local con distintas variables](https://github.com/luciaPardo/tp0#c-ejecuci%C3%B3n-local-con-distintas-variantes)
-
-
 
 # Paso 0: 
 ### a) Entorno de Trabajo
 
 Comenzamos familiriazándonos con el entorno en el que desarrollaremos a lo largo de toda la cursada, para esto compilamos y ejecutamos un programa con y sin valgrind
 
-![1.1 Paso 0 de ejecución -con y sin Valgrind-](IMG/paso0.png)
+![1.1 Paso 0 de ejecución -con y sin Valgrind-](images/paso0.png)
 
 ### b) Valgrind
 Valgrind es una herramienta que sirve para poder debugguear y detectar pérdidas de memoria que pueden ocasionarse a lo largo del código.
