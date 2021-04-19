@@ -68,31 +68,30 @@ Errores encontrados en `paso1_wordscounter.c`.
 1. En la línea 27 hace falta un espacio antes del while.
 2. En la línea 41 encuentra una asimetría entre los espacios adentro del if
 3. En la misma línea anterior aclara que debería haber uno o cero espacios entre los paréntesis y la condición.
-4. Línea 47 indica que un else debería aparecer en la misma línea que la llave `} ` que lo antecedía.
+4. Línea 47 indica que un else debería aparecer en la misma línea que la llave de cierre del 'if' que lo antecedía.
 5. Siguiendo en la misma línea establece que debería haber consistencia, si un else tiene una llave de un lado debería asimismo tenerla del otro: `} else { `. 
-6. En la línea 48 falta un espacio antes del if y el primer paréntesis subsiguiente.
-7. en la línea 53 hay un espacio de más antes de un `; `.
+6. En la línea 48 falta un espacio entre el if y el paréntesis que le sigue.
+7. en la línea 53 hay un espacio entre el `; ` de final de linea y el código correspondiente a la misma.
 8. Para el archivo `.h` de este programa, en la línea 5 indica que hay una línea con más de 80 caracteres, cuando las líneas deberían ser de 80 o menos. 
 
 Errores encontados en `main.c`: 
 
-1. Recomienda el uso de `snprintf()` en vez de `strcpy()` (línea 12) 
-(como vimos en clase, no es seguro usar strcpy ya que al no tener un límite de cuánto copiar, lo que podría llevar a sobreescribir memoria!)
+1. Recomienda el uso de `snprintf()` en vez de `strcpy()` (línea 12), dado que este último, carece de un limite claro a la hora de copiar un string y esto lo puede llevar a sobreescribir memoria.
 2. En la línea 15 indica que debería aparecer un else en la misma línea que la llave que le antecede
 3. Línea 15 indica que debería haber llaves en ambos lados del else. 
 
 Vemos que hay un total de 11 errores 
 
 ### Salida del SERCOM con errores del ejecutable:
-![Salida SERCOM con errores del ejecutable](IMG/paso1.png)
+![Salida SERCOM con errores del ejecutable](images/errores%20paso%201.png)
 
-1. En la línea 22 no reconoce el tipo `wordscounter_t`. Este corresponde a un error del compilador
+1. En la línea 22 no reconoce el tipo `wordscounter_t`. Este error se da por omitir la libreria con la declaracion cel tipo de dato que se desea utilizar.
 2. En la línea 23 falta una declaración de una función llamada `wordscounter_create`
 3. En la línea 23 falta también una declaración a la función  `wordscounter_process`
 4. En la línea 25 falta también una declaración a la función  `wordscounter_get_words`
 5. En la línea 27 falta también una declaración a la función  `wordscounter_destroy`
 
-Estos 4 errores en realidad se tratan de un Warning pero al utilizar un determinado flag de compilación (probablemente `-Wall`), lo marca como error. 
+Estos últimos 4 errores en realidad se tratan de Warnings pero al utilizar un determinado flag de compilación (probablemente `-Werror`), lo marca como error. 
 
 El último error te avisa que el makefile no pudo completar la compilación. 
 
@@ -109,18 +108,18 @@ Por último se modificó el .h para que tuviera menos de 80 caracteres.
 
 ### b) Salida SERCOM sin errores de estilo
 
-![Salida SERCOM sin errores de estilo](IMG/paso2_estilo.png)
+![Salida SERCOM sin errores de estilo](images/codificacion%20correcta%20paso%202.png)
 
 ### c) Salida SERCOM sobre errores de ejecución
 
-![Salida SERCOM sobre errores de ejecución](IMG/paso2.png)
+![Salida SERCOM sobre errores de ejecución](images/errores%20paso%202.png)
 
 Errores: 
 
 1. y 2.  Tanto la línea 7 como la 20 de `wordscounter.h` desconocen el tipo size_t. Falta incluir la biblioteca `stdlib`. Esto corresponde a un error del compilador. 
 3. Desconoce el tipo `FILE` en los parámetros de la función `wordscounter_process`. Faltó también agregar una biblioteca en el header. Es un error de compilador.
-4.  En la línea 17 en wordscounter.c hay dos tipos que son conflictivos en la función `wordscounter_get_words` y la función `paso2_wordscounter.c`. Esto ocurre porque ambos utilizan size_t y este tipo no estaba definido. Es un error del compilador porque no puede determinar el tipo a devolver.
-5. El siguiente error es por una declaración del `malloc`en la línea 30 dentro de `wordscounter_next_state` ya que no fue definida antes de su llamada. Esto en realidad consiste en un warning (ya que puede llevar a un error de linker). Sin embargo como se esta utilizando con una flag se considera directamente un error y pasa a ser un error de compilador.
+4.  En la línea 17 en wordscounter.c hay dos tipos que son conflictivos en la función `wordscounter_get_words` y la función `paso2_wordscounter.c`. Esto ocurre porque ambos utilizan size_t y este tipo no esta definido. Es un error del compilador porque no puede determinar el tipo a devolver.
+5. El siguiente error es por una declaración del `malloc`en la línea 30 dentro de `wordscounter_next_state` ya que no fue definida antes de su llamada. Esto en realidad es un warning (ya que puede llevar a un error de linker). Sin embargo,debido a los flags utilizados, se considera directamente un error y pasa a ser un error de compilador.
 6. El último consiste en el error del makefile que explicita que falló la compilación .
 
 # Paso 3
@@ -130,7 +129,7 @@ Los cambios realizados fueron en el `paso3_wordscounter.c` que se agregó la bib
 
 ### b) Errores de ejecución:
 
-![Salida SERCOM sobre errores de ejecución](IMG/paso3.png)
+![Salida SERCOM sobre errores de ejecución](images/paso3.png)
 
 Se encuentra un error en el `main.c` línea 27 ya que tiene una referencia en `wordscounter_destroy`sin definir. Esto se debe a que la función está declarada en el .h pero no está creada en el  `paso3_wordscounter.c`.
 
@@ -142,24 +141,26 @@ Se creó la función `wordscounter_destroy` en `paso4_wordscounter.c` pero esta 
 
 ### b) Salida SERCOM de Valgrind para TDA
 
-![Salida SERCOM de Valgrind para TDA ](IMG/tda.png)
+![Salida SERCOM de Valgrind para TDA 1](images/memcheck_prueba_tda_paso4.png)
+![Salida SERCOM de Valgrind para TDA 2](images/heap_sumary_prueba_tda_paso4.png)
 
-Los errores encontrados por valgrind es que se encuentra abierto el file descriptor 4 con `input_tda.txt`  y que se perdieron (definitely) 1505 bytes en 215 bloques.
-
+Errores:
+1. se encuentra abierto el file descriptor 4 y que se perdieron (definitely) 1505 bytes en 215 bloques.
+2. No se elimino el TDA al terminar de usarlo y se terminaron perdiendo (still reachable) 472 bytes en un bloques.
 
 ### c) Salida SERCOM de Valgrind para long filename 
 
-![Salida SERCOM de Valgrind para long filename ](IMG/long.png)
+![Salida SERCOM de Valgrind para long filename ](images/valgrind_long_name_paso4.png)
 
-En este caso Valgrind detectó que se excedió el buffer ocasionado por memcpy ocasionando que el programa cierre de forma forzosa.
+En este caso Valgrind detectó que se excedió el buffer definido para memcpy ocasionando que el programa cierre de forma forzosa.
 
 ### d) Strncpy()
 
-Con `strncpy()` no cambiaría nada, también excedería el buffer. Continuaría intentar copiar mas bytes de los que entran en el buffer
+Con `strncpy()` no cambiaría nada, también se excedería el buffer. La ejecucion de prueba hubiese dado error de todos formas, dado que el problema de un buffer muy chico no se solucionó al cambiar de función.
 
 ### e) segmentation fault y buffer overflow
 
-El error Segmentation fault ocurre cuando se intenta exceder de la memoria asignada. Un ejemplo puede ser cuando cuando se tiene un array con memoria para 10 elementos pero se intenta acceder por fuera de ese array, al elemento 12 por ejemplo.
+El error Segmentation fault ocurre cuando se intenta exceder de la memoria asignada. Un ejemplo puede ser cuando cuando se tiene un array con memoria para 10 elementos pero se intenta acceder por fuera de ese array, al elemento 11 por ejemplo.
 
 Buffer overflow ocurre cuando valores intentan excederse de los límites asignados a ese overflow,  ya que no ocupan más valores. Si se tuviera un buffer de 100 bytes y se quieren guardar 110 bytes se generará este error. 
 
