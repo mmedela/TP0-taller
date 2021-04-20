@@ -177,41 +177,21 @@ Observamos y vemos que los cambios realizados:
 
 ### b) Invalid file y una palabra
 
- ![Salida SERCOM con error en invalid file y una palabra](IMG/invalid.png)
+ ![Salida SERCOM con error en invalid file y una palabra](images/error_cercom_paso5.png)
 
-Para el caso de `invalid_file` vemos que hubo una discrepancia porque se obtuvo 255 y se esperaba un 1. Ocurre lo mismo para `una_palabra` en donde se obtuvo 0 y se esperaba 1. Para ambos casos SERCOM nos ofrece lo que obtuvimos vs. lo que se esperaba, una especie de diff. 
+Tanto para el caso de `invalid_file` como para `una_palabra`, podemos observar una discrepancia entre la cantidad de palabras obtenidas y la esperada. Para ambos casos SERCOM nos ofrece lo que obtuvimos vs. lo que se esperaba, una especie de diff. 
 
 ### c) hexdump
 
-![hexdump](IMG/hex.png)
+![hexdump](images/apertura_archivo_texto_paso5.png)
 
-El último carácter es `d` en vez de un end of file.
+Asumiendo el los caracteres mostrados estan escritos en hexadecimal, el ultimo caracter es una 'd'.
 
 ### d) GDB
 
-![comando gdb info functions](IMG/gdb1.png)
+![Ejecucion del gdb](images/ejecucion_gdb_paso5.png)
 
-Para el primer comando `gdb ./tp` es la forma de empezar a correr gdb con un ejecutable
-
-`info functions` muestra una lista con todas las firmas de las funciones en cada archivo, junto a sus simbolos no debugeables.
-
-
-![comando list ](IMG/gdb2.png)
-
-`list wordscounter_next_state`  muestra 10 líneas del código que envuelvan a esa función, osea 5 hacia arriba y 5 hacia abajo.
-
-`list`  muestra 10 lineas ( por default ) anteriores a lo último que se mostró por pantalla.
-
-
-![breakpoint ](IMG/gdb3.png)
-
-`break 45` crea un breakpoint en la línea 45, sirve para debuggear el programa y que pare la ejecución en ese punto.
-
-`run input_single_word.txt` corre el programa usando `input_single_word.txt` como argumento del programa a debbugear.
-
-`quit` Finaliza la ejecución de gdb.
-
-Por último el debbuger no se detuvo porque durante la ejecución nunca entra al if en donde se encuentra `self->words++ ` de la línea 45
+En mi opinion, el debbuger no se detuvo dado que durante la ejecución, nunca se entra al if en donde se encuentra `self->words++ ` de la línea 45
 
 # Paso 6
 
@@ -222,9 +202,9 @@ Para el archivo de `wordscounter.c` se arregló la lógica en `wordscounter_next
 
 ### b) Historial de submits:
 
-![Submits ](IMG/historysubmits.png)
+![historial entregas ](images/historial_paso6.png)
 
 
 ### c) Ejecución local con distintas variantes:
 
-![Pruebas Single Word ](IMG/single.png)
+![Pruebas consola](images/consola_paso6.png)
