@@ -208,3 +208,5 @@ Para el archivo de `wordscounter.c` se arregló la lógica en `wordscounter_next
 ### c) Ejecución local con distintas variantes:
 
 ![Pruebas consola](images/consola_paso6.png)
+
+En esta imagen se muestra un editor de texto con el archivo output_single_word.txt abierto, dado que en la última prueba se redirigió el resultado de la misma a este archivo.
