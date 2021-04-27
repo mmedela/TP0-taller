@@ -24,6 +24,8 @@ Las opciones más comunes son:
 ### c) sizeof() 
 sizeof como su nombre lo indica representa el tamaño que ocupa una variable (en bytes) en memoria. El valor de `sizeof(char)` seria 1 y el de `sizeof(int)` será 4 ya que es lo que ocupan estos tipos de datos respectivamente en la memoria.
 
+Depende de la arquitectura y del compilador.
+
 ### d) diferencia sizeof() de una struct respecto a una suma de sizeof() de cada uno de sus elementos. 
 El `sizeof()`  de una struct no va a coincidir siempre con la suma de los sizeof() ya que esto dependerá de como estén definidos los elementos (según tamaño) en el struct. Esto es así ya que el compilador agrega _padding_ (osea rellena los espacios vacíos para que respete la alineación especificada del compilador). Un ejemplo para clarificar:
 
@@ -38,14 +40,26 @@ struct Ejemplo {
 El `sizeof()` de este stuct por ejemplo será 24 ya que a pesar de que los int ocupan 4, se le agregará un padding de 4 para rellenar y llegar a los 8 que es el tamaño máximo que ocupa por el double. 
 Si en cambio hiciéramos la suma de los `sizeof()` de cada elemento daría 16.
 
+Es curioso lo que pasa con esa struct en 32 bits, si querés probar.
+También te recomiendo probar qué pasa con algo así:
+```C
+struct OtroEjemplo {
+    char   a; 
+    short  b;
+ };
+
+``` 
+
 
 ### e) STDIN, STDOUT, STDERR
 
-Estas tres entradas estándares le sirven a cualquier programa para operar la entrada y salida cuando se está ejecutando una shell de Unix.
+Estos tres flujos estándar le sirven a cualquier programa para operar la entrada y salida cuando se está ejecutando una shell de Unix.
 
 El *stdin* es el diminutivo de standard input y se refiere a todo con lo que recibe por entrada un proceso, puede ser interacción de teclado del usuario o un archivo recibido (en caso de que sea redirigido).
+stdin no tiene relación con el teclado sino con su proceso padre, en este caso la terminal, que es una aplicación interactiva y sí maneja eventos del teclado.
 
 *stdout* diminutivo de standard output es la salida el proceso y será mostrado en la terminal.
+Análogo al comentario de antes
 
 Por último el *stderr* al igual que los otros dos, el diminutivo es standard error y usa stdout para mostrar los errores al usuario. 
 
@@ -91,7 +105,7 @@ Vemos que hay un total de 11 errores
 4. En la línea 25 falta también una declaración a la función  `wordscounter_get_words`
 5. En la línea 27 falta también una declaración a la función  `wordscounter_destroy`
 
-Estos últimos 4 errores en realidad se tratan de Warnings pero al utilizar un determinado flag de compilación (probablemente `-Werror`), lo marca como error. 
+Estos últimos 4 errores en realidad se tratan de Warnings pero al utilizar un determinado flag de compilación (`-Werror`), lo marca como error. 
 
 El último error te avisa que el makefile no pudo completar la compilación. 
 
@@ -122,6 +136,8 @@ Errores:
 5. El siguiente error es por una declaración del `malloc`en la línea 30 dentro de `wordscounter_next_state` ya que no fue definida antes de su llamada. Esto en realidad es un warning (ya que puede llevar a un error de linker). Sin embargo,debido a los flags utilizados, se considera directamente un error y pasa a ser un error de compilador.
 6. El último consiste en el error del makefile que explicita que falló la compilación .
 
+Bien! También se habla de la declaración built-in de malloc, si querés investigar...
+
 # Paso 3
 
 ### a) Cambios realizados
@@ -133,11 +149,13 @@ Los cambios realizados fueron en el `paso3_wordscounter.c` que se agregó la bib
 
 Se encuentra un error en el `main.c` línea 27 ya que tiene una referencia en `wordscounter_destroy`sin definir. Esto se debe a que la función está declarada en el .h pero no está creada en el  `paso3_wordscounter.c`.
 
+Y eso es un error reportado por el compiler o por el linker?
+
 # Paso 4 
 
 ### a) Cambios realizados:
 
-Se creó la función `wordscounter_destroy` en `paso4_wordscounter.c` pero esta no hace nada.
+Se define la función `wordscounter_destroy` en `paso4_wordscounter.c` pero esta no hace nada.
 
 ### b) Salida SERCOM de Valgrind para TDA
 
@@ -157,10 +175,11 @@ En este caso Valgrind detectó que se excedió el buffer definido para memcpy oc
 ### d) Strncpy()
 
 Con `strncpy()` no cambiaría nada, también se excedería el buffer. La ejecucion de prueba hubiese dado error de todos formas, dado que el problema de un buffer muy chico no se solucionó al cambiar de función.
+Y qué pasaría si le pasamos el tamaño apropiado a strncpy?
 
 ### e) segmentation fault y buffer overflow
 
-El error Segmentation fault ocurre cuando se intenta exceder de la memoria asignada. Un ejemplo puede ser cuando cuando se tiene un array con memoria para 10 elementos pero se intenta acceder por fuera de ese array, al elemento 11 por ejemplo.
+El error Segmentation fault ocurre cuando se intenta exceder de la memoria asignada. Un ejemplo puede ser cuando cuando se tiene un array con memoria para 10 elementos pero se intenta acceder por fuera de ese array, al elemento 11 por ejemplo. No, eso es un buffer overflow. Un segmentation fault se da cuando un proceso intenta acceder a una posición de memoria para la que no tiene permisos suficientes (tratar de escribir en el code segment, o tratar de desreferenciar un puntero nulo causan un segmentation fault)
 
 Buffer overflow ocurre cuando valores intentan excederse de los límites asignados a ese overflow,  ya que no ocupan más valores. Si se tuviera un buffer de 100 bytes y se quieren guardar 110 bytes se generará este error. 
 
@@ -187,11 +206,15 @@ Tanto para el caso de `invalid_file` como para `una_palabra`, podemos observar u
 
 Asumiendo el los caracteres mostrados estan escritos en hexadecimal, el ultimo caracter es una 'd'.
 
+Sí, también tenés la representación ASCII a la derecha.
+
 ### d) GDB
 
 ![Ejecucion del gdb](images/ejecucion_gdb_paso5.png)
 
-En mi opinion, el debbuger no se detuvo dado que durante la ejecución, nunca se entra al if en donde se encuentra `self->words++ ` de la línea 45
+El debbuger no se detuvo dado que durante la ejecución, nunca se entra al if en donde se encuentra `self->words++ ` de la línea 45
+
+Incompleto: Explique brevemente los comandos utilizados en gdb
 
 # Paso 6
 
