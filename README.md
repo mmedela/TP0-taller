@@ -192,8 +192,11 @@ Asumiendo el los caracteres mostrados estan escritos en hexadecimal, el ultimo c
 
 ![Ejecucion del gdb](images/ejecucion_gdb_paso5.png)
 ![Ejecucion de info functions](images/list_functions_paso5.png)
+En esta imagen se puede ver como el comando info functions devuelve una lista con todas las funciones del programa debugeado.
 ![Ejecucion de list y list word_counter](images/list_word_paso5.png)
+El comando list 'function' imprime las primeras 10 líneas de código, empezando en la línea donde se declara ´function´. Si no se declaró ningun punto de inicio, seguirá imprimiendo a partir de la última linea leída (tambien 10 lineas, dado que no se le especifico otra cantidad).
 ![Ejecucion de break y run](images/break_paso5.png)
+El comando breack, establece que la línea indicada haya un breackpoint.
 
 El debbuger no se detuvo dado que durante la ejecución, nunca se entra al if en donde se encuentra `self->words++ ` de la línea 45.
 
