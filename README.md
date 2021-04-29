@@ -41,11 +41,11 @@ Si en cambio hiciéramos la suma de los `sizeof()` de cada elemento daría 16.
 
 ### e) STDIN, STDOUT, STDERR
 
-Estas tres entradas estándares le sirven a cualquier programa para operar la entrada y salida cuando se está ejecutando una shell de Unix.
+Estos tres flujos estandár le sirven a cualquier programa para operar la entrada y salida cuando se está ejecutando una shell de Unix.
 
-El *stdin* es el diminutivo de standard input y se refiere a todo con lo que recibe por entrada un proceso, puede ser interacción de teclado del usuario o un archivo recibido (en caso de que sea redirigido).
+El *stdin* es el diminutivo de standard input y se refiere a todo con lo que recibe por entrada un proceso, puede ser interacción con el usuario a travez de la consola o la informacion contenida en un archivo (en caso de que sea redirigido).
 
-*stdout* diminutivo de standard output es la salida el proceso y será mostrado en la terminal.
+*stdout* diminutivo de standard output es la salida del proceso y será mostrado en la terminal.
 
 Por último el *stderr* al igual que los otros dos, el diminutivo es standard error y usa stdout para mostrar los errores al usuario. 
 
@@ -91,7 +91,7 @@ Vemos que hay un total de 11 errores
 4. En la línea 25 falta también una declaración a la función  `wordscounter_get_words`
 5. En la línea 27 falta también una declaración a la función  `wordscounter_destroy`
 
-Estos últimos 4 errores en realidad se tratan de Warnings pero al utilizar un determinado flag de compilación (probablemente `-Werror`), lo marca como error. 
+Estos últimos 4 errores en realidad se tratan de Warnings pero al utilizar un determinado flag de compilación (`-Werror`), lo marca como error. 
 
 El último error te avisa que el makefile no pudo completar la compilación. 
 
@@ -119,7 +119,7 @@ Errores:
 1. y 2.  Tanto la línea 7 como la 20 de `wordscounter.h` desconocen el tipo size_t. Falta incluir la biblioteca `stdlib`. Esto corresponde a un error del compilador. 
 3. Desconoce el tipo `FILE` en los parámetros de la función `wordscounter_process`. Faltó también agregar una biblioteca en el header. Es un error de compilador.
 4.  En la línea 17 en wordscounter.c hay dos tipos que son conflictivos en la función `wordscounter_get_words` y la función `paso2_wordscounter.c`. Esto ocurre porque ambos utilizan size_t y este tipo no esta definido. Es un error del compilador porque no puede determinar el tipo a devolver.
-5. El siguiente error es por una declaración del `malloc`en la línea 30 dentro de `wordscounter_next_state` ya que no fue definida antes de su llamada. Esto en realidad es un warning (ya que puede llevar a un error de linker). Sin embargo,debido a los flags utilizados, se considera directamente un error y pasa a ser un error de compilador.
+5. El siguiente error es por una declaración del `malloc`en la línea 30 dentro de `wordscounter_next_state` ya que no fue definida antes de su llamada. Esto en realidad es un warning (ya que puede llevar a un error de linker). Sin embargo,debido a los flags utilizados, se considera directamente un error y pasa a ser un error de compilador. Tambien habla de un error por declaración built-in de malloc, que a mi entender, se genera por llamar una funcion nativa del lenguaje, sin declararla primero (ni tapoco incluir la libreria en la que se encuentra).
 6. El último consiste en el error del makefile que explicita que falló la compilación .
 
 # Paso 3
@@ -137,7 +137,7 @@ Se encuentra un error en el `main.c` línea 27 ya que tiene una referencia en `w
 
 ### a) Cambios realizados:
 
-Se creó la función `wordscounter_destroy` en `paso4_wordscounter.c` pero esta no hace nada.
+Se define la función `wordscounter_destroy` en `paso4_wordscounter.c` pero esta no hace nada.
 
 ### b) Salida SERCOM de Valgrind para TDA
 
@@ -160,7 +160,8 @@ Con `strncpy()` no cambiaría nada, también se excedería el buffer. La ejecuci
 
 ### e) segmentation fault y buffer overflow
 
-El error Segmentation fault ocurre cuando se intenta exceder de la memoria asignada. Un ejemplo puede ser cuando cuando se tiene un array con memoria para 10 elementos pero se intenta acceder por fuera de ese array, al elemento 11 por ejemplo.
+El error Segmentation fault ocurre cuando un proceso intenta acceder a una posición de memoria para la que no tiene permisos suficientes (tratar de escribir en el code segment, o tratar de desreferenciar un puntero nulo causan un segmentation fault).
+
 
 Buffer overflow ocurre cuando valores intentan excederse de los límites asignados a ese overflow,  ya que no ocupan más valores. Si se tuviera un buffer de 100 bytes y se quieren guardar 110 bytes se generará este error. 
 
@@ -191,7 +192,7 @@ Asumiendo el los caracteres mostrados estan escritos en hexadecimal, el ultimo c
 
 ![Ejecucion del gdb](images/ejecucion_gdb_paso5.png)
 
-En mi opinion, el debbuger no se detuvo dado que durante la ejecución, nunca se entra al if en donde se encuentra `self->words++ ` de la línea 45
+El debbuger no se detuvo dado que durante la ejecución, nunca se entra al if en donde se encuentra `self->words++ ` de la línea 45.
 
 # Paso 6
 
