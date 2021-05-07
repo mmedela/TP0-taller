@@ -24,8 +24,10 @@ Las opciones más comunes son:
 ### c) sizeof() 
 sizeof como su nombre lo indica representa el tamaño que ocupa una variable (en bytes) en memoria. El valor de `sizeof(char)` seria 1 y el de `sizeof(int)` será 4 ya que es lo que ocupan estos tipos de datos respectivamente en la memoria.
 
+Depende de la arquitectura y del compilador. Marcado en la primera entrega.
+
 ### d) diferencia sizeof() de una struct respecto a una suma de sizeof() de cada uno de sus elementos. 
-El `sizeof()`  de una struct no va a coincidir siempre con la suma de los sizeof() ya que esto dependerá de como estén definidos los elementos (según tamaño) en el struct. Esto es así ya que el compilador agrega _padding_ (osea rellena los espacios vacíos para que respete la alineación especificada del compilador). Un ejemplo para clarificar:
+El `sizeof()`  de una struct no va a coincidir siempre con la suma de los sizeof() ya que esto dependerá de cómo estén definidos los elementos (según tamaño) en el struct. Esto es así ya que el compilador agrega _padding_ (osea rellena los espacios vacíos para que respete la alineación especificada del compilador). Un ejemplo para clarificar:
 
 ```C
 struct Ejemplo {
@@ -133,6 +135,8 @@ Los cambios realizados fueron en el `paso3_wordscounter.c` que se agregó la bib
 
 Se encuentra un error en el `main.c` línea 27 ya que tiene una referencia en `wordscounter_destroy`sin definir. Esto se debe a que la función está declarada en el .h pero no está creada en el  `paso3_wordscounter.c`.
 
+Es error del linker o del compiler? Marcado en la primera entrega
+
 # Paso 4 
 
 ### a) Cambios realizados:
@@ -161,7 +165,7 @@ Con `strncpy()` no cambiaría nada, también se excedería el buffer. La ejecuci
 ### e) segmentation fault y buffer overflow
 
 El error Segmentation fault ocurre cuando un proceso intenta acceder a una posición de memoria para la que no tiene permisos suficientes (tratar de escribir en el code segment, o tratar de desreferenciar un puntero nulo causan un segmentation fault).
-
+Se entiende eso? Es textual lo que escribí en la corrección, lo importante es que vos lo sepas
 
 Buffer overflow ocurre cuando valores intentan excederse de los límites asignados a ese overflow,  ya que no ocupan más valores. Si se tuviera un buffer de 100 bytes y se quieren guardar 110 bytes se generará este error. 
 
@@ -196,7 +200,7 @@ En esta imagen se puede ver como el comando info functions devuelve una lista co
 ![Ejecucion de list y list word_counter](images/list_word_paso5.png)
 El comando list 'function' imprime las primeras 10 líneas de código, empezando en la línea donde se declara ´function´. Si no se declaró ningun punto de inicio, seguirá imprimiendo a partir de la última linea leída (tambien 10 lineas, dado que no se le especifico otra cantidad).
 ![Ejecucion de break y run](images/break_paso5.png)
-El comando breack, establece que la línea indicada haya un breackpoint.
+El comando break, establece que la línea indicada haya un breakpoint.
 
 El debbuger no se detuvo dado que durante la ejecución, nunca se entra al if en donde se encuentra `self->words++ ` de la línea 45.
 
